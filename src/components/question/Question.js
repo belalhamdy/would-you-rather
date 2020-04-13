@@ -28,4 +28,4 @@ function mapStateToProps ({authedUser, users, tweets}, { id }) {
             : null
     }*/
 }
-connect(mapStateToProps)(Question);
+export default connect(mapStateToProps)(Question);

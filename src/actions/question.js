@@ -2,7 +2,7 @@
 // Add question
 // Get Questions
 import {showLoading, hideLoading} from "react-redux-loading";
-import {_saveQuestion,_saveQuestionAnswer} from "../../utils/_DATA";
+import {_saveQuestion,_saveQuestionAnswer} from "../utils/_DATA";
 
 export const ANSWER_QUESTION = "ANSWER_QUESTION";
 export const ADD_QUESTION = "ADD_QUESTION";
@@ -14,7 +14,9 @@ function answerQuestion({qid,answer,authedUser}) {
         type: ANSWER_QUESTION,qid,answer,authedUser
     }
 }
-
+export function isAnsweredQuestion(question,authedUser) {
+    return (question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser))
+}
 export function handleAnswerQuestion({qid,answer}) {
     return (dispatch, getState) => {
         const {authedUser} = getState();

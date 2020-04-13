@@ -6,20 +6,18 @@ import LoadingBar from "react-redux-loading";
 
 class AnsweredQuestion extends Component{
     render() {
+        const {question} = this.props;
         return (
-            <div>Answered Question</div>
+            <div>
+                <div>{question.author}</div>
+            </div>
         )
     }
 }
-function mapStateToProps ({authedUser, users, tweets}, { id }) {
-    /*const tweet = tweets[id];
-    const parentTweet = tweet ? tweets[tweet.replyingTo] : null;
-
-    return {
-        authedUser,
-        tweet: tweet
-            ? formatTweet(tweet, users[tweet.author], authedUser, parentTweet)
-            : null
-    }*/
+function mapStateToProps ({questions, authedUser},{id}) {
+    const question = questions[id];
+    return{
+        question
+    }
 }
 export default connect(mapStateToProps)(AnsweredQuestion);

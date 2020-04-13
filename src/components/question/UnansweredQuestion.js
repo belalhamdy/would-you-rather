@@ -3,22 +3,20 @@ import {connect} from 'react-redux'
 // eslint-disable-next-line no-unused-vars
 import { Link, withRouter } from 'react-router-dom'
 
-class UnansweredQuestion extends Component{
+class AnsweredQuestion extends Component{
     render() {
+        const {question} = this.props;
         return (
-            <div>Unanswered Question</div>
+            <div>
+                <div>{question.author}</div>
+            </div>
         )
     }
 }
-function mapStateToProps ({authedUser, users, tweets}, { id }) {
-    /*const tweet = tweets[id];
-    const parentTweet = tweet ? tweets[tweet.replyingTo] : null;
-
-    return {
-        authedUser,
-        tweet: tweet
-            ? formatTweet(tweet, users[tweet.author], authedUser, parentTweet)
-            : null
-    }*/
+function mapStateToProps ({questions, authedUser},{id}) {
+    const question = questions[id];
+    return{
+        question
+    }
 }
-export default connect(mapStateToProps)(UnansweredQuestion);
+export default connect(mapStateToProps)(AnsweredQuestion);
