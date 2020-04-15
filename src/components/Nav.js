@@ -31,7 +31,7 @@ class NavBar extends Component{
 }
 
 function mapStateToProps ({ authedUser }) {
-    console.log("h5a " + authedUser);
+
     return {
         authorized: authedUser !== null,authedUser
     }

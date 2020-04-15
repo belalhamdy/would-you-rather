@@ -24,16 +24,10 @@ class Home extends Component {
     }
 }
 
-function mapStateToProps({authedUser, users, tweets}, {id}) {
-    /*const tweet = tweets[id];
-    const parentTweet = tweet ? tweets[tweet.replyingTo] : null;
-
+function mapStateToProps({authedUser}) {
     return {
-        authedUser,
-        tweet: tweet
-            ? formatTweet(tweet, users[tweet.author], authedUser, parentTweet)
-            : null
-    }*/
+        authedUser
+    }
 }
 
 export default connect(mapStateToProps)(Home);

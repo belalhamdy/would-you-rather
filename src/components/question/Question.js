@@ -9,20 +9,26 @@ import {Link, withRouter} from 'react-router-dom'
 
 class Question extends Component {
     render() {
-        const {question, isAnswered,answeredOption} = this.props;
+
+        const {question, isAnswered, answeredOption, notFound,author} = this.props;
+        if (notFound) return <h1>Error Question not found</h1>;
         return (
             <div>
-                {isAnswered ? <AnsweredQuestion question = {question} answeredOption = {answeredOption}/>
-                : <UnansweredQuestion question = {question}/>}
+                {isAnswered ? <AnsweredQuestion question={question} answeredOption={answeredOption} author = {author}/>
+                    : <UnansweredQuestion question={question} author = {author}/>}
             </div>
         )
     }
 }
 
 function mapStateToProps({authedUser, users, questions}, props) {
-    console.log("authed" + authedUser)
     const {id} = props.match.params;
+
     const question = questions[id];
+   if (question === undefined) return {
+        notFound: true
+    };
+
     const isAnswered = isAnsweredQuestion(question, authedUser);
     let answeredOption = '';
     if (isAnswered) {
@@ -30,7 +36,7 @@ function mapStateToProps({authedUser, users, questions}, props) {
         if (question.optionTwo.votes.includes(authedUser)) answeredOption = OPTION_TWO;
     }
     return {
-        question, isAnswered,answeredOption
+        question, isAnswered, answeredOption,author: users[authedUser]
     }
 }
 

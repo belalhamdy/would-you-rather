@@ -16,8 +16,8 @@ import authedUser from "../reducers/authedUser";
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
-    this.props.dispatch(setAuthedUser("sarahedo"));
+      this.props.dispatch(setAuthedUser("sarahedo"));
+      this.props.dispatch(handleInitialData());
 
   }
   render() {
@@ -29,7 +29,7 @@ class App extends Component {
                     <LoadingBar />
                     {this.props.loading === true
                         ? null
-                        : <div>
+                        : (<div>
                             <Route path='/' exact component={Home} />
                             <Route path='/home' exact component={Home} />
                             <Route path='/question/:id' component={Question} />
@@ -37,7 +37,7 @@ class App extends Component {
                             <Route path='/add' component={NewQuestion} />
                             <Route path='/leaderboard' component={Leaderboard} />
                             <Route path='/signin' component={SignIn} />
-                        </div>}
+                        </div>)}
                 </div>
             </Fragment>
         </Router>
@@ -46,6 +46,7 @@ class App extends Component {
 }
 
 function mapStateToProps ({questions, authedUser }) {
+
   return {
       authorized: authedUser !== null,
       loading: questions === null

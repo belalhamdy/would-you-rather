@@ -53,7 +53,7 @@ let questions = {
         author: 'johndoe',
         timestamp: 1468479767190,
         optionOne: {
-            votes: [],
+            votes: ['tylermcginnis'],
             text: 'become a superhero',
         },
         optionTwo: {
@@ -183,7 +183,7 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
                         [qid]: answer
                     }
                 }
-            }
+            };
 
             questions = {
                 ...questions,
