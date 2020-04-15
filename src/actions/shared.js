@@ -8,8 +8,8 @@ export function handleInitialData() {
         dispatch(showLoading());
         return _getQuestions().then((questions) => {
             _getUsers().then((users) =>{
-                dispatch(getQuestions(questions));
                 dispatch(getUsers(users));
+                dispatch(getQuestions(questions));
                 dispatch(hideLoading())
             });
         })

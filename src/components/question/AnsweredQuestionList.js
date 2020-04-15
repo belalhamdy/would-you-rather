@@ -11,10 +11,10 @@ import QuestionView from "./QuestionView";
 class AnsweredQuestionList extends Component{
     render() {
         return (
-            <ul>
+            <ul className="dashboard-list">
                 {this.props.questionsIds.map((id) => (
                     <li key={id} >
-                        <QuestionView id = {id} answered = {true}/>
+                        <QuestionView id = {id}/>
                     </li>
                 ))
                 }

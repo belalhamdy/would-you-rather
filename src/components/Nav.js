@@ -8,9 +8,7 @@ class NavBar extends Component{
         console.log("pressed")
     };
     render() {
-        const authorized = this.props.authorized;
-        var authedUser = "g";
-        var authedUserId = "1";
+        const {authorized,authedUser} = this.props;
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Navbar.Brand href="home">Would You Rather</Navbar.Brand>
@@ -20,16 +18,9 @@ class NavBar extends Component{
                         <Nav.Link href="/Home">Home</Nav.Link>
                         <Nav.Link href="/Add">Add Question</Nav.Link>
                         <Nav.Link href="/Leaderboard">Leaderboard</Nav.Link>
-                        {/*<NavDropdown title="Dropdown" id="collasible-nav-dropdown">*/}
-                        {/*     <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>*/}
-                        {/*     <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>*/}
-                        {/*     <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>*/}
-                        {/*     <NavDropdown.Divider />*/}
-                        {/*     <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>*/}
-                        {/* </NavDropdown>*/}
                     </Nav>
                     <Nav>
-                        {authorized  &&  <Nav.Link href = {`/profile/${authedUserId}`}>Hello {authedUser}</Nav.Link>}
+                        {authorized  &&  <Nav.Link href = {`/profile/${authedUser}`}>Hello {authedUser}</Nav.Link>}
                         {authorized  &&   <Nav.Link onClick = {e => this.handleLogout(e)}>Logout</Nav.Link>}
                         {!authorized  && <Nav.Link href = "/signin">Sign In</Nav.Link>}
                     </Nav>
@@ -40,9 +31,9 @@ class NavBar extends Component{
 }
 
 function mapStateToProps ({ authedUser }) {
-
+    console.log("h5a " + authedUser);
     return {
-        authorized: authedUser !== null
+        authorized: authedUser !== null,authedUser
     }
 }
 export default connect(mapStateToProps)(NavBar);

@@ -15,7 +15,7 @@ class UnansweredQuestionList extends Component{
             <ul>
                 {this.props.questionsIds.map((id) => (
                     <li key={id}>
-                        <QuestionView id = {id} answered = {false}/>
+                        <QuestionView id = {id} />
                     </li>
                 ))
                 }
