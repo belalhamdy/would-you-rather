@@ -16,18 +16,17 @@ class UnansweredQuestion extends Component {
     }
 
     render() {
-        const {question, author,dispatch} = this.props;
+        const {question, author, dispatch} = this.props;
         const handleSubmit = (event) => {
             event.preventDefault();
             if (this.selectedOption !== OPTION_ONE && this.selectedOption !== OPTION_TWO) {
                 alert("You Have to Choose an Option");
             } else {
-                dispatch(handleAnswerQuestion(question.id,this.selectedOption));
-                //this.props.history.push(`/`);
+                dispatch(handleAnswerQuestion(question.id, this.selectedOption));
             }
         };
         return (
-            <div className="new-question">
+            <div>
                 <Form onSubmit={handleSubmit}>
                     <div className="question">
                         <div>
@@ -41,44 +40,24 @@ class UnansweredQuestion extends Component {
                                     <h1>{author.name} Asks</h1>
                                     <div className="separator"/>
                                     <h4>Would You Rather</h4>
-                                    <p className="optionOne">{question.optionOne.text}?</p>
-                                    <h4>OR</h4>
-                                    <p className="optionTwo">{question.optionTwo.text}?</p>
+                                    <fieldset>
+                                        <Form.Group>
+                                            <div className="optionOneRadio">
+                                                <Form.Check type="radio" label={question.optionOne.text} name="optionsGroup"
+                                                            id="optionOneRadio" onChange={() => {this.selectedOption = OPTION_ONE; }} />
+                                            </div>
+                                            <div className="optionTwoRadio">
+                                                <Form.Check type="radio" label={question.optionTwo.text} name="optionsGroup"
+                                                            id="optionTwoRadio" onChange={() => {this.selectedOption = OPTION_TWO; }} />
+                                            </div>
+                                        </Form.Group>
+                                    </fieldset>
                                 </div>
+                                <div className="separator"/>
                             </div>
                         </div>
-                        <div className="separator"/>
-                        <div>
-                            <Link to={`/question/${question.id}`} className='question-btn'>
-                                <Button variant="secondary" size="lg" block>
-                                    View
-                                </Button>
-                            </Link>
-                        </div>
+                        <Button type="submit" size="lg" block>Submit Vote</Button>
                     </div>
-                    <fieldset>
-                        <Form.Group>
-                            <Form.Check
-                                type="radio"
-                                label="first radio"
-                                name="formHorizontalRadios"
-                                id="formHorizontalRadios1"
-                                onChange={() => {
-                                    this.selectedOption = OPTION_ONE;
-                                }}
-                            />
-                            <Form.Check
-                                type="radio"
-                                label="second radio"
-                                name="formHorizontalRadios"
-                                id="formHorizontalRadios2"
-                                onChange={() => {
-                                    this.selectedOption = OPTION_TWO;
-                                }}
-                            />
-                        </Form.Group>
-                    </fieldset>
-                    <Button type="submit" size="lg" block>Submit Vote</Button>
                 </Form>
             </div>
         )

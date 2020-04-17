@@ -25,9 +25,9 @@ class QuestionView extends Component {
                             <h4>OR</h4>
                             <p className="optionTwo">{question.optionTwo.text}?</p>
                         </div>
+                        <div className="separator"/>
                     </div>
                 </div>
-                <div className="separator"/>
                 <div>
                     <Link to={`/question/${question.id}`} className='question-btn'>
                         <Button variant="secondary" size="lg" block>
