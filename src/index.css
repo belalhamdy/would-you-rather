@@ -97,7 +97,8 @@ li {
 .avatar {
     height: 50px;
     border-radius: 25px;
-    margin: 10px;
+    display: flex;
+    float:left;
 }
 
 .question {
@@ -108,7 +109,7 @@ li {
     margin: 0 auto;
     border: 1px solid #dad7d7;
     box-shadow: 5px 5px lightgray;
-    cursor: pointer;
+    /*cursor: pointer;*/
     background-color: #1B2631;
 }
 
@@ -207,8 +208,11 @@ li {
 .new-question {
     width: 100%;
     max-width: 590px;
-    margin: 0 auto;
     display: flex;
+    padding: 10px;
+    margin: 10px auto 0;
+    border: 2px solid #1B2631;
+    border-radius: 10px;
     flex-direction: column;
 }
 

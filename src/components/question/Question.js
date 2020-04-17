@@ -10,12 +10,12 @@ import {Link, withRouter} from 'react-router-dom'
 class Question extends Component {
     render() {
 
-        const {question, isAnswered, answeredOption, notFound,author} = this.props;
+        const {question, isAnswered, answeredOption, notFound,author,authedUser} = this.props;
         if (notFound) return <h1>Error Question not found</h1>;
         return (
             <div>
                 {isAnswered ? <AnsweredQuestion question={question} answeredOption={answeredOption} author = {author}/>
-                    : <UnansweredQuestion question={question} author = {author}/>}
+                    : <UnansweredQuestion question={question} author = {author} authedUser = {authedUser} history = {this.props.history}/>}
             </div>
         )
     }
@@ -29,6 +29,7 @@ function mapStateToProps({authedUser, users, questions}, props) {
         notFound: true
     };
 
+   console.log(question);
     const isAnswered = isAnsweredQuestion(question, authedUser);
     let answeredOption = '';
     if (isAnswered) {
@@ -36,7 +37,7 @@ function mapStateToProps({authedUser, users, questions}, props) {
         if (question.optionTwo.votes.includes(authedUser)) answeredOption = OPTION_TWO;
     }
     return {
-        question, isAnswered, answeredOption,author: users[authedUser]
+        question, isAnswered, answeredOption,author: users[question.author],authedUser
     }
 }
 

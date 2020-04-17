@@ -4,12 +4,18 @@ import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import Button from "react-bootstrap/Button";
 
+
 class QuestionView extends Component {
     render() {
         const {question, author} = this.props;
         return (
             <div className="question" >
                 <div>
+                    <img
+                        src={author.avatarURL}
+                        alt={`Avatar of ${author.name}`}
+                        className='avatar'
+                    />
                     <div className='question-info'>
                         <div>
                             <h1>{author.name} Asks</h1>

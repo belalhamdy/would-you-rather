@@ -13,7 +13,11 @@ export default function questions(state = null, action) {
             return {
                 ...state, [action.qid]: {
                     ...state[action.qid],
-                    [action.answer]: [action.answer].concat(action.authedUser)
+                    [action.answer]:
+                        {
+                            ...state[action.qid][action.answer],
+                            votes:state[action.qid][action.answer].votes.concat(action.authedUser)
+                        }
                 }
             };
         case ADD_QUESTION:

@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { connect } from 'react-redux'
+import React, {Component, Fragment} from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {connect} from 'react-redux'
 import {handleInitialData} from "../actions/shared";
 import LoadingBar from 'react-redux-loading'
 import NavBar from "./Nav";
@@ -12,45 +12,51 @@ import NewQuestion from "./question/NewQuestion";
 import Leaderboard from "./Leaderboard";
 import Profile from "./Profile";
 import authedUser from "../reducers/authedUser";
+import {handleAddQuestion} from "../actions/question";
 
 
 class App extends Component {
-  componentDidMount() {
-      this.props.dispatch(setAuthedUser("sarahedo"));
-      this.props.dispatch(handleInitialData());
 
-  }
-  render() {
-    return (
-        <Router>
-            <Fragment>
-                <div className='container'>
-                    <NavBar />
-                    <LoadingBar />
-                    {this.props.loading === true
-                        ? null
-                        : (<div>
-                            <Route path='/' exact component={Home} />
-                            <Route path='/home' exact component={Home} />
-                            <Route path='/question/:id' component={Question} />
-                            <Route path='/profile/:id' component={Profile} />
-                            <Route path='/add' component={NewQuestion} />
-                            <Route path='/leaderboard' component={Leaderboard} />
-                            <Route path='/signin' component={SignIn} />
-                        </div>)}
-                </div>
-            </Fragment>
-        </Router>
-    )
-  }
+    componentDidMount() {
+        if (this.props.loading) {
+            this.props.dispatch(setAuthedUser("sarahedo"));
+            this.props.dispatch(handleInitialData());
+        }
+
+    }
+
+
+    render() {
+        return (
+            <Router>
+                <Fragment>
+                    <div className='container'>
+                        <NavBar/>
+                        <LoadingBar/>
+                        {this.props.loading === true
+                            ? null
+                            : (<div>
+                                <Route path='/' exact component={Home}/>
+                                <Route path='/home' exact component={Home}/>
+                                <Route path='/question/:id' component={Question}/>
+                                <Route path='/profile/:id' component={Profile}/>
+                                <Route path='/add' component={NewQuestion}/>
+                                <Route path='/leaderboard' component={Leaderboard}/>
+                                <Route path='/signin' component={SignIn}/>
+                            </div>)}
+                    </div>
+                </Fragment>
+            </Router>
+        )
+    }
 }
 
-function mapStateToProps ({questions, authedUser }) {
+function mapStateToProps({questions, authedUser,users}) {
 
-  return {
-      authorized: authedUser !== null,
-      loading: questions === null
-  }
+    return {
+        authorized: authedUser !== null,
+        loading: questions === null
+    }
 }
 
 export default connect(mapStateToProps)(App)

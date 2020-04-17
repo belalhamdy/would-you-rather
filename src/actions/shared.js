@@ -4,7 +4,7 @@ import {showLoading,hideLoading} from "react-redux-loading";
 import {_getQuestions, _getUsers} from "../utils/_DATA";
 
 export function handleInitialData() {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(showLoading());
         return _getQuestions().then((questions) => {
             _getUsers().then((users) =>{
