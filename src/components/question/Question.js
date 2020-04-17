@@ -29,7 +29,6 @@ function mapStateToProps({authedUser, users, questions}, props) {
         notFound: true
     };
 
-   console.log(question);
     const isAnswered = isAnsweredQuestion(question, authedUser);
     let answeredOption = '';
     if (isAnswered) {

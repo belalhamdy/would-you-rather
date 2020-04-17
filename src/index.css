@@ -100,6 +100,27 @@ li {
     display: flex;
     float:left;
 }
+.profile {
+    border-radius: 25px;
+    width: 100%;
+    max-width: 590px;
+    padding: 10px;
+    margin: 10px auto 0;
+    border: 1px solid #dad7d7;
+    box-shadow: 5px 5px lightgray;
+    /*cursor: pointer;*/
+    background-color: #1B2631;
+}
+
+.profile h1 {
+    color: gold;
+    padding-left: 60px;
+}
+
+.profile h4 {
+    color: lightyellow;
+    text-Align: center;
+}
 
 .question {
     border-radius: 25px;
@@ -167,6 +188,11 @@ li {
 }
 
 .question-info {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.avatar-info {
     margin: 10px;
     display: flex;
     flex-direction: column;
