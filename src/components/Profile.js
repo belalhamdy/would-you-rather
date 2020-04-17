@@ -36,8 +36,8 @@ class Profile extends Component {
 }
 
 function mapStateToProps({authedUser, users, questions}, props) {
+    if (props.match === undefined) return ;
     const {id} = props.match.params;
-
     const user = users[id];
     if (user === undefined) return {
         notFound: true

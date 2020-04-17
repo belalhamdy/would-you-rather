@@ -1,24 +1,33 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 // eslint-disable-next-line no-unused-vars
-import { Link, withRouter } from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
+import {isAnsweredQuestion} from "../actions/question";
+import QuestionView from "./question/QuestionView";
+import Profile from "./Profile";
 
-class Leaderboard extends Component{
+class Leaderboard extends Component {
     render() {
+        let rank = 1;
         return (
-            <div>Leaderboard</div>
-        )
+            <ul>
+                {this.props.usersIds.map((id) => (
+                    <Link to={`/profile/${id}`}>
+                        <li key={id}>
+                            <Profile user={this.props.users[id]} rank={rank++}/>
+                        </li>
+                    </Link>))}
+            </ul>)
     }
 }
-function mapStateToProps ({authedUser, users, tweets}, { id }) {
-    /*const tweet = tweets[id];
-    const parentTweet = tweet ? tweets[tweet.replyingTo] : null;
 
+function mapStateToProps({users}) {
+    const getScore = (user) => {
+        return Object.keys(user.answers).length - user.questions.length;
+    };
     return {
-        authedUser,
-        tweet: tweet
-            ? formatTweet(tweet, users[tweet.author], authedUser, parentTweet)
-            : null
-    }*/
+        usersIds: Object.keys(users).sort((a, b) => getScore(users[b]) - getScore(users[a])), users
+    }
 }
+
 export default connect(mapStateToProps)(Leaderboard);

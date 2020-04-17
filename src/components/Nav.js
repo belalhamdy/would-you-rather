@@ -37,7 +37,7 @@ class NavBar extends Component {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        <LinkContainer to="/">
+                        <LinkContainer exact to="/">
                             <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/Add">
