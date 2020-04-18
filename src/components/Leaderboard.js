@@ -1,13 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 // eslint-disable-next-line no-unused-vars
-import {Link, withRouter} from 'react-router-dom'
-import {isAnsweredQuestion} from "../actions/question";
-import QuestionView from "./question/QuestionView";
+import {Link} from 'react-router-dom'
 import Profile from "./Profile";
+import {UNAUTHORIZED} from "../actions/authedUser";
 
 class Leaderboard extends Component {
     render() {
+        if (this.props.authedUser === UNAUTHORIZED) this.props.history.push("/signin");
+
         let rank = 1;
         return (
             <ul>
@@ -21,12 +22,13 @@ class Leaderboard extends Component {
     }
 }
 
-function mapStateToProps({users}) {
+function mapStateToProps({users, authedUser}) {
     const getScore = (user) => {
         return Object.keys(user.answers).length - user.questions.length;
     };
     return {
-        usersIds: Object.keys(users).sort((a, b) => getScore(users[b]) - getScore(users[a])), users
+        usersIds: Object.keys(users).sort((a, b) => getScore(users[b]) - getScore(users[a])),
+        users, authedUser
     }
 }
 

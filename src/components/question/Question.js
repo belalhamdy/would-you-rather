@@ -1,15 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import AnsweredQuestion from "./AnsweredQuestion";
-import NewQuestion from "./NewQuestion";
 import UnansweredQuestion from "./UnansweredQuestion";
 import {isAnsweredQuestion, OPTION_ONE, OPTION_TWO} from "../../actions/question";
 // eslint-disable-next-line no-unused-vars
-import {Link, withRouter} from 'react-router-dom'
+import {UNAUTHORIZED} from "../../actions/authedUser";
 
 class Question extends Component {
     render() {
-
+        if (this.props.authedUser === UNAUTHORIZED) this.props.history.push("/signin");
         const {question, isAnswered, answeredOption, notFound,author,authedUser} = this.props;
         if (notFound) return <h1>Error Question not found</h1>;
         return (

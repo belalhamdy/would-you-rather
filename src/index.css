@@ -268,9 +268,15 @@ li {
     height: 100px;
 }
 
-.question-length {
-    text-align: right;
+.notFound {
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 80px;
+    text-align: center;
     color: #C3392A;
+}
+
+.notFoundP {
+    font-size: 41px;
+    text-align: center;
+    color: #1B2631;
 }

@@ -3,11 +3,10 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 // eslint-disable-next-line no-unused-vars
 import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {handleAddQuestion} from "../../actions/question";
-import {Redirect} from "react-router-dom";
+import {UNAUTHORIZED} from "../../actions/authedUser";
 
 class NewQuestion extends Component {
     constructor(props) {
@@ -18,6 +17,7 @@ class NewQuestion extends Component {
 
 
     render() {
+        if (this.props.authedUser === UNAUTHORIZED) this.props.history.push("/signin");
         const handleSubmit = (event) => {
             event.preventDefault();
             const {dispatch} = this.props;
@@ -69,4 +69,10 @@ class NewQuestion extends Component {
 
 }
 
-export default connect()(NewQuestion);
+function mapStateToProps({authedUser}) {
+    return {
+        authedUser
+    }
+}
+
+export default connect(mapStateToProps)(NewQuestion);

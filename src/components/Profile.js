@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 // eslint-disable-next-line no-unused-vars
-import {Link, withRouter} from 'react-router-dom'
-import {isAnsweredQuestion, OPTION_ONE, OPTION_TWO} from "../actions/question";
-import Button from "react-bootstrap/Button";
+import {UNAUTHORIZED} from "../actions/authedUser";
 
 class Profile extends Component {
 
     render() {
+
+        if (this.props.authedUser === UNAUTHORIZED) this.props.history.push("/signin");
         const {user, rank} = this.props;
         const answersCnt = Object.keys(user.answers).length;
         const questionsCnt = user.questions.length;
@@ -44,7 +44,7 @@ function mapStateToProps({authedUser, users, questions}, props) {
     };
 
     return {
-        user
+        user, authedUser
     }
 }
 

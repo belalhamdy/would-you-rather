@@ -1,35 +1,19 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Navbar, Nav, NavDropdown, NavItem} from 'react-bootstrap';
-import {Link} from "react-router-dom";
+import {Nav, Navbar} from 'react-bootstrap';
 import {LinkContainer} from "react-router-bootstrap";
+import {setAuthedUser, UNAUTHORIZED} from "../actions/authedUser";
 
 class NavBar extends Component {
     handleLogout = (e) => {
-        // todo handle logout here
-        console.log("pressed")
+        e.preventDefault();
+        const {dispatch} = this.props;
+        dispatch(setAuthedUser(UNAUTHORIZED));
     };
 
     render() {
         const {authorized, authedUser} = this.props;
-        return (/*
-           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand href="home">Would You Rather</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="mr-auto">
-                        <Nav.Link href="/Home">Home</Nav.Link>
-                        <Nav.Link href="/Add">Add Question</Nav.Link>
-                        <Nav.Link href="/Leaderboard">Leaderboard</Nav.Link>
-                    </Nav>
-                    <Nav>
-                        {authorized  &&  <Nav.Link href = {`/profile/${authedUser}`}>Hello {authedUser}</Nav.Link>}
-                        {authorized  &&   <Nav.Link onClick = {e => this.handleLogout(e)}>Logout</Nav.Link>}
-                        {!authorized  && <Nav.Link href = "/signin">Sign In</Nav.Link>}
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>*/
-
+        return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <LinkContainer to="/">
                     <Navbar.Brand>Would You Rather</Navbar.Brand>
@@ -48,12 +32,13 @@ class NavBar extends Component {
                         </LinkContainer>
                     </Nav>
                     <Nav>
+                        <Navbar.Toggle/>
                         {authorized &&
                         <LinkContainer to={`/profile/${authedUser}`}>
                             <Nav.Link>Hello {authedUser}</Nav.Link>
                         </LinkContainer>}
                         {authorized &&
-                        <LinkContainer to="/signin">
+                        <LinkContainer to="/">
                             <Nav.Link onClick={e => this.handleLogout(e)}>Logout</Nav.Link>
                         </LinkContainer>}
                         {!authorized &&
@@ -70,7 +55,7 @@ class NavBar extends Component {
 function mapStateToProps({authedUser}) {
 
     return {
-        authorized: authedUser !== null, authedUser
+        authorized: authedUser !== '', authedUser
     }
 }
 

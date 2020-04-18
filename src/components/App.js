@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {handleInitialData} from "../actions/shared";
 import LoadingBar from 'react-redux-loading'
@@ -11,15 +11,18 @@ import {setAuthedUser} from "../actions/authedUser";
 import NewQuestion from "./question/NewQuestion";
 import Leaderboard from "./Leaderboard";
 import Profile from "./Profile";
-import authedUser from "../reducers/authedUser";
-import {handleAddQuestion} from "../actions/question";
 
+
+const NotFound = () => <div><h1 className="notFound">Error 404</h1> <p className="notFoundP">Page is Not Found</p>
+</div>;
+
+const NotFoundRedirect = () => <Redirect to='/not-found'/>;
 
 class App extends Component {
 
     componentDidMount() {
         if (this.props.loading) {
-            this.props.dispatch(setAuthedUser("sarahedo"));
+            this.props.dispatch(setAuthedUser(""));
             this.props.dispatch(handleInitialData());
         }
 
@@ -33,16 +36,19 @@ class App extends Component {
                     <div className='container'>
                         <NavBar/>
                         <LoadingBar/>
-                        {this.props.loading === true
-                            ? null
+                        {this.props.loading === true ? null
                             : (<div>
-                                <Route path='/' exact component={Home}/>
-                                <Route path='/home' exact component={Home}/>
-                                <Route path='/question/:id' component={Question}/>
-                                <Route path='/profile/:id' component={Profile}/>
-                                <Route path='/add' component={NewQuestion}/>
-                                <Route path='/leaderboard' component={Leaderboard}/>
-                                <Route path='/signin' component={SignIn}/>
+                                <Switch>
+                                    <Route path='/' exact component={Home}/>
+                                    <Route path='/home' exact component={Home}/>
+                                    <Route path='/question/:id' component={Question}/>
+                                    <Route path='/profile/:id' component={Profile}/>
+                                    <Route path='/add' component={NewQuestion}/>
+                                    <Route path='/leaderboard' component={Leaderboard}/>
+                                    <Route path='/signin' component={SignIn}/>
+                                    <Route path='/not-found' component={NotFound}/>
+                                    <Route component={NotFoundRedirect}/>
+                                </Switch>
                             </div>)}
                     </div>
                 </Fragment>
@@ -51,10 +57,10 @@ class App extends Component {
     }
 }
 
-function mapStateToProps({questions, authedUser,users}) {
+function mapStateToProps({questions, authedUser}) {
 
     return {
-        authorized: authedUser !== null,
+        authorized: authedUser !== '',
         loading: questions === null
     }
 }
