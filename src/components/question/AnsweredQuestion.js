@@ -1,9 +1,4 @@
-import React, {Component, Fragment} from 'react'
-import {connect} from 'react-redux'
-// eslint-disable-next-line no-unused-vars
-import {BrowserRouter as Router, Link, Route, withRouter} from 'react-router-dom'
-import LoadingBar from "react-redux-loading";
-import Button from "react-bootstrap/Button";
+import React, {Component} from 'react'
 import ProgressBar from "react-bootstrap/ProgressBar";
 import {OPTION_ONE, OPTION_TWO} from "../../actions/question";
 import {MdDone} from 'react-icons/md';

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 // eslint-disable-next-line no-unused-vars
-import {Link, withRouter} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Button from "react-bootstrap/Button";
 
 

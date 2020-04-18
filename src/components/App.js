@@ -7,7 +7,6 @@ import NavBar from "./Nav";
 import Home from "./Home";
 import Question from "./question/Question"
 import SignIn from "./SignIn";
-import {setAuthedUser} from "../actions/authedUser";
 import NewQuestion from "./question/NewQuestion";
 import Leaderboard from "./Leaderboard";
 import Profile from "./Profile";
@@ -22,13 +21,10 @@ class App extends Component {
 
     componentDidMount() {
         if (this.props.loading) {
-            this.props.dispatch(setAuthedUser(""));
             this.props.dispatch(handleInitialData());
         }
 
     }
-
-
     render() {
         return (
             <Router>
@@ -36,7 +32,7 @@ class App extends Component {
                     <div className='container'>
                         <NavBar/>
                         <LoadingBar/>
-                        {this.props.loading === true ? null
+                        {this.props.loading === true ? <h1 className="notFound">Loading</h1>
                             : (<div>
                                 <Switch>
                                     <Route path='/' exact component={Home}/>

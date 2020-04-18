@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-// eslint-disable-next-line no-unused-vars
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {setAuthedUser, UNAUTHORIZED} from "../actions/authedUser";
+import {Redirect} from "react-router-dom";
 
 const defaultSelect = "Select...";
 
@@ -17,7 +17,9 @@ class SignIn extends Component {
 
 
     render() {
-        if (this.props.authedUser !== UNAUTHORIZED) this.props.history.push("/");
+        if (this.props.authedUser !== UNAUTHORIZED) {
+            return <Redirect to='/'/>
+        }
         const handleSubmit = (event) => {
             event.preventDefault();
             if (this.selected === defaultSelect) alert("Please Select a user");

@@ -1,8 +1,9 @@
 // Answer question
 // Add question
 // Get Questions
-import {showLoading, hideLoading} from "react-redux-loading";
-import {_saveQuestion, _saveQuestionAnswer} from "../utils/_DATA";
+import {hideLoading, showLoading} from "react-redux-loading";
+import {_getUsers, _saveQuestion, _saveQuestionAnswer} from "../utils/_DATA";
+import {getUsers} from "./users";
 
 export const ANSWER_QUESTION = "ANSWER_QUESTION";
 export const ADD_QUESTION = "ADD_QUESTION";
@@ -27,7 +28,10 @@ export function handleAnswerQuestion(qid, answer) {
         const question = {qid, answer, authedUser: authedUser};
         return _saveQuestionAnswer(question).then(() => {
             dispatch(answerQuestion(question));
-            dispatch(hideLoading());
+            _getUsers().then((users) => {
+                dispatch(getUsers(users));
+                dispatch(hideLoading())
+            });
         })
     }
 }
@@ -46,7 +50,10 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
             optionOneText, optionTwoText, author: authedUser
         }).then((question) => {
             dispatch(addQuestion(question));
-            dispatch(hideLoading());
+            _getUsers().then((users) => {
+                dispatch(getUsers(users));
+                dispatch(hideLoading())
+            });
         })
     }
 }

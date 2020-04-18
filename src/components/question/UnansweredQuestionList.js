@@ -1,10 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import AnsweredQuestion from "./AnsweredQuestion";
-import NewQuestion from "./NewQuestion";
-import UnansweredQuestion from "./UnansweredQuestion";
-// eslint-disable-next-line no-unused-vars
-import { Link, withRouter } from 'react-router-dom'
 import {isAnsweredQuestion} from "../../actions/question";
 import QuestionView from "./QuestionView";
 

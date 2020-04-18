@@ -1,13 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-// eslint-disable-next-line no-unused-vars
 import {UNAUTHORIZED} from "../actions/authedUser";
+import {Redirect} from "react-router-dom";
 
 class Profile extends Component {
 
     render() {
-
-        if (this.props.authedUser === UNAUTHORIZED) this.props.history.push("/signin");
+        if (this.props.authedUser === UNAUTHORIZED) {
+            return <Redirect to='/signin'/>
+        }
         const {user, rank} = this.props;
         const answersCnt = Object.keys(user.answers).length;
         const questionsCnt = user.questions.length;
@@ -36,7 +37,7 @@ class Profile extends Component {
 }
 
 function mapStateToProps({authedUser, users, questions}, props) {
-    if (props.match === undefined) return ;
+    if (props.match === undefined) return {};
     const {id} = props.match.params;
     const user = users[id];
     if (user === undefined) return {

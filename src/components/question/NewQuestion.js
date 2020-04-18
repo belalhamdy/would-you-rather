@@ -7,6 +7,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {handleAddQuestion} from "../../actions/question";
 import {UNAUTHORIZED} from "../../actions/authedUser";
+import {Redirect} from "react-router-dom";
 
 class NewQuestion extends Component {
     constructor(props) {
@@ -17,7 +18,9 @@ class NewQuestion extends Component {
 
 
     render() {
-        if (this.props.authedUser === UNAUTHORIZED) this.props.history.push("/signin");
+        if (this.props.authedUser === UNAUTHORIZED) {
+            return <Redirect to='/signin'/>
+        }
         const handleSubmit = (event) => {
             event.preventDefault();
             const {dispatch} = this.props;

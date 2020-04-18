@@ -1,12 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-// eslint-disable-next-line no-unused-vars
-import {Link, withRouter} from 'react-router-dom'
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {handleAnswerQuestion, OPTION_ONE, OPTION_TWO} from "../../actions/question";
-import {Col, FormGroup, Row} from "react-bootstrap";
 
 class UnansweredQuestion extends Component {
     constructor(props) {

@@ -3,18 +3,21 @@ import {connect} from 'react-redux'
 import AnsweredQuestion from "./AnsweredQuestion";
 import UnansweredQuestion from "./UnansweredQuestion";
 import {isAnsweredQuestion, OPTION_ONE, OPTION_TWO} from "../../actions/question";
-// eslint-disable-next-line no-unused-vars
 import {UNAUTHORIZED} from "../../actions/authedUser";
+import {Redirect} from "react-router-dom";
 
 class Question extends Component {
     render() {
-        if (this.props.authedUser === UNAUTHORIZED) this.props.history.push("/signin");
-        const {question, isAnswered, answeredOption, notFound,author,authedUser} = this.props;
+        if (this.props.authedUser === UNAUTHORIZED) {
+            return <Redirect to='/signin'/>
+        }
+        const {question, isAnswered, answeredOption, notFound, author, authedUser} = this.props;
         if (notFound) return <h1>Error Question not found</h1>;
         return (
             <div>
-                {isAnswered ? <AnsweredQuestion question={question} answeredOption={answeredOption} author = {author}/>
-                    : <UnansweredQuestion question={question} author = {author} authedUser = {authedUser} history = {this.props.history}/>}
+                {isAnswered ? <AnsweredQuestion question={question} answeredOption={answeredOption} author={author}/>
+                    : <UnansweredQuestion question={question} author={author} authedUser={authedUser}
+                                          history={this.props.history}/>}
             </div>
         )
     }
