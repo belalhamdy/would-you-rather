@@ -35,7 +35,7 @@ class NewQuestion extends Component {
                             </InputGroup.Prepend>
                             <Form.Control
                                 type="text"
-                                placeholder="Would you rather be.."
+                                placeholder="Would you rather.."
                                 aria-describedby="inputGroupPrepend"
                                 required
                                 ref={(ref) => {
@@ -52,7 +52,7 @@ class NewQuestion extends Component {
                             </InputGroup.Prepend>
                             <Form.Control
                                 type="text"
-                                placeholder="Or be.."
+                                placeholder="Or.."
                                 aria-describedby="inputGroupPrepend"
                                 required
                                 ref={(ref) => {
