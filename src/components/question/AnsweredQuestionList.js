@@ -20,7 +20,7 @@ class AnsweredQuestionList extends Component{
 function mapStateToProps ({questions, authedUser }) {
     return {
         authedUser,
-        questionsIds: Object.keys(questions).filter(question => isAnsweredQuestion(questions[question],authedUser)).sort((a, b) => questions[b].timeStamp - questions[a].timeStamp)
+        questionsIds: Object.keys(questions).filter(question => isAnsweredQuestion(questions[question], authedUser)).sort((a, b) => questions[b].timestamp - questions[a].timestamp)
     }
 }
 export default connect(mapStateToProps)(AnsweredQuestionList);

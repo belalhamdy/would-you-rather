@@ -34,9 +34,10 @@ class AnsweredQuestion extends Component {
                                 <h4>Results</h4>
                                 <ProgressBar>
                                     {optionOneCnt > 0 && (<ProgressBar animated variant="info" now={optionOnePercentage}
-                                                 label={optionOneCnt} key={1}/>)}
-                                    {optionTwoCnt > 0 && (<ProgressBar animated variant="success" now={`${100 - optionOnePercentage}`}
-                                                 label={optionTwoCnt} key={2}/>)}
+                                                                       label={`${optionOnePercentage}%`} key={1}/>)}
+                                    {optionTwoCnt > 0 && (
+                                        <ProgressBar animated variant="success" now={`${100 - optionOnePercentage}`}
+                                                     label={`${100 - optionOnePercentage}%`} key={2}/>)}
                                 </ProgressBar>
                                 <h4 className="question-info">Total Number of Votes is {total}.</h4>
 
